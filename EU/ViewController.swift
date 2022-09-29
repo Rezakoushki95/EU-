@@ -18,6 +18,32 @@ class ViewController: UIViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "showDetail" {
+			let destination = segue.destination as! DetailViewController
+			let selectedIndexPath = tableView.indexPathForSelectedRow!
+			destination.countryName = euMembers[selectedIndexPath.row]
+		} else {
+			if let selectedIndexPath = tableView.indexPathForSelectedRow {
+				tableView.deselectRow(at: selectedIndexPath, animated: false)
+			}
+		}
+	}
+	
+	@IBAction func unwindFromDetail(segue: UIStoryboardSegue) {
+		let source = segue.source as! DetailViewController
+		if let selectedIndexPath = tableView.indexPathForSelectedRow {
+			euMembers[selectedIndexPath.row] = source.countryName
+			tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+		} else {
+			let newIndexPath = IndexPath(row: euMembers.count, section: 0)
+			euMembers.append(source.countryName)
+			tableView.insertRows(at: [newIndexPath], with: .bottom)
+			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+		}
+	}
+	
 
 
 }

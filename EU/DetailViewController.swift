@@ -12,10 +12,22 @@ class DetailViewController: UITableViewController {
 	@IBOutlet weak var saveBarButton: UIBarButtonItem!
 	@IBOutlet weak var countryField: UITextField!
 	@IBOutlet weak var capitalField: UITextField!
+	
+	var countryName: String!
 	override func viewDidLoad() {
         super.viewDidLoad()
+		countryField.text = countryName
 
     }
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		countryName = countryField.text
+		
+		if countryName == nil {
+			countryName = ""
+		}
+	}
+
 	@IBAction func cancelBarButtonPressed(_ sender: UIButton) {
 		let isPresentingInAddMode = presentingViewController is UINavigationController
 		
@@ -25,14 +37,4 @@ class DetailViewController: UITableViewController {
 			navigationController?.popViewController(animated: true)
 		}
 	}
-	
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		return 1
-//    }
 }

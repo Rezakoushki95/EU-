@@ -63,7 +63,7 @@
             <objects>
                 <tableViewController id="Hav-w3-WEg" customClass="DetailViewController" customModule="EU" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="qgt-qj-AaE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -139,7 +139,11 @@
                                 <action selector="cancelBarButtonPressed:" destination="Hav-w3-WEg" id="rtL-K1-XjD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PKG-Wa-9nd"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PKG-Wa-9nd">
+                            <connections>
+                                <segue destination="2W7-BA-1HC" kind="unwind" unwindAction="unwindFromDetailWithSegue:" id="3JM-5H-stL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="capitalField" destination="G0c-y0-rcT" id="eAZ-MM-UdU"/>
@@ -148,6 +152,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8s-dy-VjW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="2W7-BA-1HC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2924" y="104.7976011994003"/>
         </scene>
@@ -189,7 +194,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2xD-Vk-DLm"/>
+        <segue reference="2gZ-BA-avG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
