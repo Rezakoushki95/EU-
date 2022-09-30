@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet weak var addBarButton: UIBarButtonItem!
 	@IBOutlet weak var tableView: UITableView!
 	
 	var euMembers = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
@@ -44,6 +45,20 @@ class ViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func editBarButtonPressed(_ sender: UIBarButtonItem) {
+		if tableView.isEditing {
+			tableView.setEditing(false, animated: true)
+			sender.title = "Edit"
+			addBarButton.isEnabled = true
+		} else {
+			tableView.setEditing(true, animated: true)
+			sender.title = "Done"
+			addBarButton.isEnabled = false
+		}
+			
+	}
+	
+	
 
 
 }
@@ -62,6 +77,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		return cell
 	}
 	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			euMembers.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		let itemToEdit = euMembers[sourceIndexPath.row]
+		euMembers.remove(at: sourceIndexPath.row)
+		euMembers.insert(itemToEdit, at: destinationIndexPath.row)
+		
+	}
+	
+	
+
 	
 }
 
