@@ -13,6 +13,7 @@
 		F50E4EB128D68C840003CAFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F50E4EAF28D68C840003CAFE /* Main.storyboard */; };
 		F50E4EB328D68C880003CAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F50E4EB228D68C880003CAFE /* Assets.xcassets */; };
 		F50E4EB628D68C880003CAFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F50E4EB428D68C880003CAFE /* LaunchScreen.storyboard */; };
+		F51839AC28ECF5B8000AADE5 /* Nation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51839AB28ECF5B8000AADE5 /* Nation.swift */; };
 		F59BAAB728D8B75800455AE5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59BAAB628D8B75800455AE5 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		F50E4EB228D68C880003CAFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F50E4EB528D68C880003CAFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F50E4EB728D68C880003CAFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F51839AB28ECF5B8000AADE5 /* Nation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nation.swift; sourceTree = "<group>"; };
 		F59BAAB628D8B75800455AE5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +62,7 @@
 			children = (
 				F50E4EA928D68C840003CAFE /* AppDelegate.swift */,
 				F50E4EAB28D68C840003CAFE /* SceneDelegate.swift */,
+				F51839AB28ECF5B8000AADE5 /* Nation.swift */,
 				F50E4EAD28D68C840003CAFE /* ViewController.swift */,
 				F59BAAB628D8B75800455AE5 /* DetailViewController.swift */,
 				F50E4EAF28D68C840003CAFE /* Main.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				F50E4EAE28D68C840003CAFE /* ViewController.swift in Sources */,
 				F50E4EAA28D68C840003CAFE /* AppDelegate.swift in Sources */,
+				F51839AC28ECF5B8000AADE5 /* Nation.swift in Sources */,
 				F50E4EAC28D68C840003CAFE /* SceneDelegate.swift in Sources */,
 				F59BAAB728D8B75800455AE5 /* DetailViewController.swift in Sources */,
 			);

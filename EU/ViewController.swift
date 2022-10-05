@@ -12,19 +12,30 @@ class ViewController: UIViewController {
 	@IBOutlet weak var addBarButton: UIBarButtonItem!
 	@IBOutlet weak var tableView: UITableView!
 	
-	var euMembers = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
+	var nations: [Nation] = []
+	
+	var countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
+	
+	var captials = ["Vienna", "Brussels", "Sofia", "Zagreb", "Nicosia", "Prague", "Copenhagen", "Tallinn", "Helsinki", "Paris", "Berlin", "Athens", "Budapest", "Dublin", "Rome", "Riga", "Vilnius", "Luxembourg (city)", "Valetta", "Amsterdam", "Warsaw", "Lisbon", "Bucharest", "Bratislava", "Ljubljana", "Madrid", "Stockholm", "London"]
+	
+	var usesEuro = [true, true, false, false, true, false, false, true, true, true, true, true, false, true, true, true, true, true, true, true, false, true, false, true, true, true, false, false]
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
+		
+		for index in 0..<countries.count {
+			nations.append(Nation(country: countries[index], capital: captials[index], usesEuro: usesEuro[index]))
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 			let destination = segue.destination as! DetailViewController
 			let selectedIndexPath = tableView.indexPathForSelectedRow!
-			destination.countryName = euMembers[selectedIndexPath.row]
+			destination.nation = nations[selectedIndexPath.row]
 		} else {
 			if let selectedIndexPath = tableView.indexPathForSelectedRow {
 				tableView.deselectRow(at: selectedIndexPath, animated: false)
@@ -35,11 +46,11 @@ class ViewController: UIViewController {
 	@IBAction func unwindFromDetail(segue: UIStoryboardSegue) {
 		let source = segue.source as! DetailViewController
 		if let selectedIndexPath = tableView.indexPathForSelectedRow {
-			euMembers[selectedIndexPath.row] = source.countryName
+			nations[selectedIndexPath.row] = source.nation
 			tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
 		} else {
-			let newIndexPath = IndexPath(row: euMembers.count, section: 0)
-			euMembers.append(source.countryName)
+			let newIndexPath = IndexPath(row: countries.count, section: 0)
+			nations.append(source.nation)
 			tableView.insertRows(at: [newIndexPath], with: .bottom)
 			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 		}
@@ -65,34 +76,33 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
 	
+
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		print("😎 numberOfRowsInSection called. returning \(euMembers.count)")
-		return euMembers.count
+		print("😎 numberOfRowsInSection called. returning \(countries.count)")
+		return nations.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		cell.textLabel?.text = euMembers[indexPath.row]
-		print("🚣‍♀️ CellForRowAt called for indexPath.row =  \(indexPath.row), which is the cell containing \(euMembers[indexPath.row])")
+		cell.textLabel?.text = nations[indexPath.row].country
+		cell.detailTextLabel?.text = "Capital: \(nations[indexPath.row].capital)"
+		print("🚣‍♀️ CellForRowAt called for indexPath.row =  \(indexPath.row), which is the cell containing \(nations[indexPath.row].country)")
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			euMembers.remove(at: indexPath.row)
+			nations.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .fade)
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-		let itemToEdit = euMembers[sourceIndexPath.row]
-		euMembers.remove(at: sourceIndexPath.row)
-		euMembers.insert(itemToEdit, at: destinationIndexPath.row)
+		let itemToEdit = nations[sourceIndexPath.row]
+		nations.remove(at: sourceIndexPath.row)
+		nations.insert(itemToEdit, at: destinationIndexPath.row)
 		
 	}
-	
-	
-
 	
 }
 
