@@ -26,8 +26,34 @@ class ViewController: UIViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		
-		for index in 0..<countries.count {
-			nations.append(Nation(country: countries[index], capital: captials[index], usesEuro: usesEuro[index]))
+		loadData()
+	}
+	
+	func saveData() {
+		let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+		let documentURL = directoryURL.appendingPathComponent("nations").appendingPathExtension("json")
+		
+		let jsonEncoder = JSONEncoder()
+		let data = try? jsonEncoder.encode(nations)
+		
+		do {
+			try data?.write(to: documentURL, options: .noFileProtection)
+		} catch {
+			print("ERROR Could not save data \(error.localizedDescription)")
+		}
+	}
+	
+	func loadData() {
+		let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+		let documentURL = directoryURL.appendingPathComponent("nations").appendingPathExtension("json")
+		
+		guard let data = try? Data(contentsOf: documentURL) else {return}
+		let jsonDecoder = JSONDecoder()
+		do {
+			nations = try jsonDecoder.decode(Array<Nation>.self, from: data)
+			tableView.reloadData()
+		} catch {
+			print("ERROR Could Not Load Data \(error.localizedDescription)")
 		}
 	}
 	
@@ -54,6 +80,7 @@ class ViewController: UIViewController {
 			tableView.insertRows(at: [newIndexPath], with: .bottom)
 			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 		}
+		saveData()
 	}
 	
 	@IBAction func editBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -66,12 +93,7 @@ class ViewController: UIViewController {
 			sender.title = "Done"
 			addBarButton.isEnabled = false
 		}
-			
 	}
-	
-	
-
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -94,6 +116,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		if editingStyle == .delete {
 			nations.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .fade)
+			saveData()
 		}
 	}
 	
@@ -101,8 +124,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		let itemToEdit = nations[sourceIndexPath.row]
 		nations.remove(at: sourceIndexPath.row)
 		nations.insert(itemToEdit, at: destinationIndexPath.row)
-		
+		saveData()
 	}
-	
 }
 
