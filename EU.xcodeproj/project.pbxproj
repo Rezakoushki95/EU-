@@ -14,6 +14,7 @@
 		F50E4EB328D68C880003CAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F50E4EB228D68C880003CAFE /* Assets.xcassets */; };
 		F50E4EB628D68C880003CAFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F50E4EB428D68C880003CAFE /* LaunchScreen.storyboard */; };
 		F51839AC28ECF5B8000AADE5 /* Nation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51839AB28ECF5B8000AADE5 /* Nation.swift */; };
+		F576703F28F4717100EFFBFC /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F576703E28F4717100EFFBFC /* ListTableViewCell.swift */; };
 		F59BAAB728D8B75800455AE5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59BAAB628D8B75800455AE5 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		F50E4EB528D68C880003CAFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F50E4EB728D68C880003CAFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F51839AB28ECF5B8000AADE5 /* Nation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nation.swift; sourceTree = "<group>"; };
+		F576703E28F4717100EFFBFC /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		F59BAAB628D8B75800455AE5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 				F50E4EB228D68C880003CAFE /* Assets.xcassets */,
 				F50E4EB428D68C880003CAFE /* LaunchScreen.storyboard */,
 				F50E4EB728D68C880003CAFE /* Info.plist */,
+				F576703E28F4717100EFFBFC /* ListTableViewCell.swift */,
 			);
 			path = EU;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				F51839AC28ECF5B8000AADE5 /* Nation.swift in Sources */,
 				F50E4EAC28D68C840003CAFE /* SceneDelegate.swift in Sources */,
 				F59BAAB728D8B75800455AE5 /* DetailViewController.swift in Sources */,
+				F576703F28F4717100EFFBFC /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,12 +14,6 @@ class ViewController: UIViewController {
 	
 	var nations: [Nation] = []
 	
-	var countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
-	
-	var captials = ["Vienna", "Brussels", "Sofia", "Zagreb", "Nicosia", "Prague", "Copenhagen", "Tallinn", "Helsinki", "Paris", "Berlin", "Athens", "Budapest", "Dublin", "Rome", "Riga", "Vilnius", "Luxembourg (city)", "Valetta", "Amsterdam", "Warsaw", "Lisbon", "Bucharest", "Bratislava", "Ljubljana", "Madrid", "Stockholm", "London"]
-	
-	var usesEuro = [true, true, false, false, true, false, false, true, true, true, true, true, false, true, true, true, true, true, true, true, false, true, false, true, true, true, false, false]
-	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -75,7 +69,7 @@ class ViewController: UIViewController {
 			nations[selectedIndexPath.row] = source.nation
 			tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
 		} else {
-			let newIndexPath = IndexPath(row: countries.count, section: 0)
+			let newIndexPath = IndexPath(row: nations.count, section: 0)
 			nations.append(source.nation)
 			tableView.insertRows(at: [newIndexPath], with: .bottom)
 			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
@@ -96,19 +90,33 @@ class ViewController: UIViewController {
 	}
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, listTableViewCellDelegate {
+	
+	func euroButtonToggled(sender: ListTableViewCell) {
+		if let selectedIndexPath = tableView.indexPath(for: sender) {
+			nations[selectedIndexPath.row].usesEuro = !nations[selectedIndexPath.row].usesEuro
+			tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+			saveData()
+		}
+			
+		
+	}
+	
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 60
+	}
 	
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		print("😎 numberOfRowsInSection called. returning \(countries.count)")
 		return nations.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		cell.textLabel?.text = nations[indexPath.row].country
-		cell.detailTextLabel?.text = "Capital: \(nations[indexPath.row].capital)"
-		print("🚣‍♀️ CellForRowAt called for indexPath.row =  \(indexPath.row), which is the cell containing \(nations[indexPath.row].country)")
+		
+		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
+		cell.delegate = self
+		cell.nation = nations[indexPath.row]
 		return cell
 	}
 	
